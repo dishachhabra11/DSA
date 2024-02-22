@@ -36,6 +36,7 @@ public:
        bool right=isBalanced(root->right);
        if(right ==false )return false;
        bool balance=abs(height(root->left)-height(root->right)) <= 1;
+       if(balance ==false )return false;
        if(left && right && balance){
            return true;
        }
