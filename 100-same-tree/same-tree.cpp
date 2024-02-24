@@ -15,7 +15,6 @@ public:
     void traverseLevelOrderWise(TreeNode* root,vector<int> &ans){
        queue<TreeNode*> q;
        q.push(root);
-
        while(!q.empty()){
            TreeNode* temp=q.front();
            if(temp==nullptr){
@@ -28,25 +27,51 @@ public:
            q.push(temp->left);
            q.push(temp->right);
            }
-         
-
        }
-      
-      
-
     }
     bool isSameTree(TreeNode* p, TreeNode* q) {
-   vector<int> ans_p;
-   vector<int> ans_q;
 
-      traverseLevelOrderWise(p,ans_p);
-      traverseLevelOrderWise(q,ans_q);
+        
+        if(p==nullptr && q==nullptr)return true;
+        else if(p==nullptr || q==nullptr)return false;
 
-        if(ans_p == ans_q){
-           
-            return true;
+    queue <TreeNode*> qp;
+    queue <TreeNode*> qq;
+
+
+    qp.push(p);
+    qq.push(q);
+
+    while(!qp.empty() || !qq.empty()){
+        TreeNode* temp_p=qp.front();
+        TreeNode* temp_q=qq.front();
+      
+           if(temp_p==nullptr ^ temp_q ==nullptr){
+               return false;
+           }
+           else if(temp_p==nullptr && temp_q ==nullptr){
+              qq.pop();
+              qp.pop();
+           }
+        
+            else if(temp_p->val != temp_q->val){
+            return false;
         }
+        
+        else {
+            
+            qp.pop();
+            qq.pop();
+    
+    qp.push(temp_p->left);
+    qq.push(temp_q->left);
+    qp.push(temp_p->right);
+    qq.push(temp_q->right);
 
-         return false;
+        }
+         
+    }
+    return true;
+    
     }
 };
