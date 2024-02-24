@@ -12,7 +12,23 @@
 class Solution {
 public:
 
-    
+    void traverseLevelOrderWise(TreeNode* root,vector<int> &ans){
+       queue<TreeNode*> q;
+       q.push(root);
+       while(!q.empty()){
+           TreeNode* temp=q.front();
+           if(temp==nullptr){
+               ans.push_back(-1);
+               q.pop();
+           }
+           else{
+               ans.push_back(temp->val);
+           q.pop();
+           q.push(temp->left);
+           q.push(temp->right);
+           }
+       }
+    }
     bool isSameTree(TreeNode* p, TreeNode* q) {
 
         
