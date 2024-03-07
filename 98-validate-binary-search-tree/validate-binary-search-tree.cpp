@@ -22,7 +22,7 @@ public:
 
    bool validateBST(TreeNode* root,long min,long max){
        if(root ==NULL) return true;
-         if(root->val < min && root->val >max)return false;
+         if(root->val < min || root->val >max)return false;
        
        if(root->val > min && root->val <max && validateBST(root->left,min,root->val) &&validateBST(root->right,root->val,max))return true;
        return false;
